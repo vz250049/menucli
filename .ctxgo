@@ -1,0 +1,16 @@
+technical-services-dev, gcloud container clusters get-credentials technical-services --region us-central1 --project technical-services-dev
+technical-services-stg, gcloud container clusters get-credentials technical-services --region us-central1 --project technical-services-stg
+technical-services-prd, gcloud container clusters get-credentials technical-services --region us-central1 --project technical-services-prd
+technical-services-prd-apac, gcloud container clusters get-credentials technical-services --region australia-southeast1 --project technical-services-prd-apac
+technical-services-prd-emea, gcloud container clusters get-credentials technical-services --region europe-west1 --project technical-services-prd-emea
+technical-services-prd-napac, gcloud container clusters get-credentials technical-services --region asia-southeast1 --project bsp-technicalsrvc-sag01-prod
+business-services-prd-dev, gcloud container clusters get-credentials business-services-platform --region us-central1 --project business-services-platform-dev
+business-services-prd-stg, gcloud container clusters get-credentials technical-services --region us-central1 --project technical-services-stg
+business-services-prd, gcloud container clusters get-credentials business-services-platform --region us-central1 --project business-services-platform-prd
+business-services-prd-apac, gcloud container clusters get-credentials business-services-platform --region australia-southeast1 --project business-services-prd-apac
+business-services-prd-emea, gcloud container clusters get-credentials business-services-platform --region europe-west1 --project business-services-prd-emea
+business-services-prd-napac, gcloud container clusters get-credentials business-services-platform --region asia-southeast1 --project bsp-bservices-sag01-prod
+business-services-messaging-prd, gcloud container clusters get-credentials bsp-messaging --region us-central1 --project business-services-platform-prd
+business-services-messaging-apac, gcloud container clusters get-credentials bsp-messaging --region australia-southeast1 --project business-services-prd-apac
+business-services-messaging-emea, gcloud container clusters get-credentials bsp-messaging --region europe-west1 --project business-services-prd-emea
+business-services-messaging-napac, gcloud container clusters get-credentials bsp-messaging --region asia-southeast1 --project bsp-bservices-sag01-prod

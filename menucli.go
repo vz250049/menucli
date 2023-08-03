@@ -121,11 +121,11 @@ func getInput() byte {
 	readBytes := make([]byte, 3)
 	read, err = t.Read(readBytes)
 
-	err := t.Restore()
+	err = t.Restore()
 	if err != nil {
 		return 0
 	}
-	err := t.Close()
+	err = t.Close()
 	if err != nil {
 		return 0
 	}

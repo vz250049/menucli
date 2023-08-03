@@ -3,23 +3,36 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/vz250049/menucli"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
 )
 
-const path = ".goctx"
+const config = "/.ctxgo"
+
+func getPath() string {
+	x, y := exec.Command("echo", os.Getenv("HOME")), new(strings.Builder)
+	x.Stdout = y
+	err := x.Run()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	a := y.String()
+	osDir := strings.Replace(a, "\n", "", -1)
+	return osDir
+}
 
 func readLines(path string) ([]string, error) {
-	file, err := os.Open(path)
+
+	file, err := os.Open(path + config)
 	if err != nil {
 		return nil, err
 	}
 	defer func(file *os.File) {
 		err := file.Close()
 		if err != nil {
-
 		}
 	}(file)
 
@@ -32,7 +45,7 @@ func readLines(path string) ([]string, error) {
 }
 
 func createMenu(lines []string) error {
-	menu := gocliselect.NewMenu("Select Connection")
+	menu := menucli.NewMenu("Select Connection")
 	for _, line := range lines {
 		stringSlice := strings.Split(line, ", ")
 		menu.AddItem(stringSlice[0], stringSlice[1])
@@ -65,7 +78,7 @@ func confirmContext() error {
 
 func main() {
 
-	lines, err := readLines(path)
+	lines, err := readLines(getPath())
 	if err != nil {
 		log.Fatalf("readLines: %s", err)
 	}
