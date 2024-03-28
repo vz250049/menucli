@@ -1,6 +1,6 @@
-module github.com/vz250049/menucli
+module menucli
 
-go 1.18
+go 1.21.4
 
 require (
 	github.com/buger/goterm v1.0.4

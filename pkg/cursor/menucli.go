@@ -1,4 +1,4 @@
-package menucli
+package cursor
 
 import (
 	"fmt"
@@ -93,7 +93,7 @@ func (m *Menu) Display() string {
 			menuItem := m.MenuItems[m.CursorPos]
 			fmt.Println("\r")
 			return menuItem.ID
-		} else if keyCode == down {
+		} else if keyCode == up {
 			m.CursorPos = (m.CursorPos + len(m.MenuItems) - 1) % len(m.MenuItems)
 			m.renderMenuItems(true)
 		} else if keyCode == j {
@@ -102,12 +102,13 @@ func (m *Menu) Display() string {
 		} else if keyCode == k {
 			m.CursorPos = (m.CursorPos + len(m.MenuItems) - 1) % len(m.MenuItems)
 			m.renderMenuItems(true)
-		} else if keyCode == up {
+		} else if keyCode == down {
 			m.CursorPos = (m.CursorPos + 1) % len(m.MenuItems)
 			m.renderMenuItems(true)
 		}
 	}
 }
+
 
 func getInput() byte {
 	t, _ := term.Open("/dev/tty")
