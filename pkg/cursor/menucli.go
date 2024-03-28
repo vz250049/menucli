@@ -5,10 +5,12 @@ import (
 	"github.com/buger/goterm"
 	"github.com/pkg/term"
 	"log"
+	"os"
 )
 
 var j byte = 106
 var k byte = 107
+var q byte = 113
 var up byte = 65
 var down byte = 66
 var escape byte = 27
@@ -19,6 +21,7 @@ var keys = map[byte]bool{
 	down: true,
 	j:    true,
 	k:    true,
+	q:    true,
 }
 
 type Menu struct {
@@ -78,6 +81,10 @@ func (m *Menu) Display() string {
 		fmt.Printf("\033[?25h")
 	}()
 
+	totalRows := len(m.MenuItems) + 2
+	fmt.Printf("\033[8;%d;180t", totalRows)
+
+	fmt.Print("\033[H\033[2J")
 	fmt.Printf("%s\n", goterm.Color(goterm.Bold(m.Prompt)+":", goterm.CYAN))
 
 	m.renderMenuItems(false)
@@ -105,6 +112,9 @@ func (m *Menu) Display() string {
 		} else if keyCode == down {
 			m.CursorPos = (m.CursorPos + 1) % len(m.MenuItems)
 			m.renderMenuItems(true)
+		}else if keyCode == q {
+			fmt.Printf("\033[?25h")
+			os.Exit(0)
 		}
 	}
 }

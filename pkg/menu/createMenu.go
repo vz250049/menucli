@@ -9,12 +9,11 @@ import (
 )	
 
 func CreateMenu(lines []string) error {
-	menu := cursor.NewMenu("\n\nSelect Connection:\n\n")
+	menu := cursor.NewMenu("\n\nSelect Connection: [ \"q\" to quit] \n\n")
 	for _, line := range lines {
 		stringSlice := strings.Split(line, ", ")
 		menu.AddItem(stringSlice[0], stringSlice[1])
 	}
-	menu.AddItem("<Quit Menu>", "Quit Menu")
 	choice := menu.Display()
 
 	println(choice)
