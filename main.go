@@ -11,6 +11,7 @@ import (
 
 const config = "/usr/local/bin/.ctxgo.config"
 
+
 func readLines() ([]string, error) {
 
 	file, err := os.Open(config)
@@ -31,26 +32,12 @@ func readLines() ([]string, error) {
 }
 
 
-// func main() {
-
-// 	lines, err := readLines()
-// 	if err != nil {
-// 		log.Fatalf("readLines: %s", err)
-// 	}
-// 	err = menu.CreateMenu(lines)
-// 	if err != nil {
-// 		log.Fatalf("setContext: %s", err)
-// 	}
-// 	err = context.ConfirmContext()
-// 	if err != nil {
-// 		log.Fatalf("confirmContext: %s", err)
-// 	}
-// }
 func main() {
     var rootCmd = &cobra.Command{
         Use:   "ctxgo",
+		Version: "v2.0",
         Short: "GCP context switcher",
-        Long:  "GCP delivers a menu to switch between contexts.",
+        Long:  "ctxgo delivers a menu selection to switch between GCP contexts.",
         Run: func(cmd *cobra.Command, args []string) {
             lines, err := readLines()
             if err != nil {
@@ -58,7 +45,7 @@ func main() {
             }
             err = menu.CreateMenu(lines)
             if err != nil {
-                log.Fatalf("setContext: %s", err)
+                log.Fatalf("Error: Access issue %s", err)
             }
             err = context.ConfirmContext()
             if err != nil {
@@ -66,6 +53,6 @@ func main() {
             }
         },
     }
-
+	
     rootCmd.Execute()
 }
