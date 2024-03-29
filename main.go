@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"github.com/spf13/cobra"
 	"log"
 	"menucli/pkg/context"
 	"menucli/pkg/menu"
@@ -30,18 +31,41 @@ func readLines() ([]string, error) {
 }
 
 
-func main() {
+// func main() {
 
-	lines, err := readLines()
-	if err != nil {
-		log.Fatalf("readLines: %s", err)
-	}
-	err = menu.CreateMenu(lines)
-	if err != nil {
-		log.Fatalf("setContext: %s", err)
-	}
-	err = context.ConfirmContext()
-	if err != nil {
-		log.Fatalf("confirmContext: %s", err)
-	}
+// 	lines, err := readLines()
+// 	if err != nil {
+// 		log.Fatalf("readLines: %s", err)
+// 	}
+// 	err = menu.CreateMenu(lines)
+// 	if err != nil {
+// 		log.Fatalf("setContext: %s", err)
+// 	}
+// 	err = context.ConfirmContext()
+// 	if err != nil {
+// 		log.Fatalf("confirmContext: %s", err)
+// 	}
+// }
+func main() {
+    var rootCmd = &cobra.Command{
+        Use:   "ctxgo",
+        Short: "GCP context switcher",
+        Long:  "GCP delivers a menu to switch between contexts.",
+        Run: func(cmd *cobra.Command, args []string) {
+            lines, err := readLines()
+            if err != nil {
+                log.Fatalf("readLines: %s", err)
+            }
+            err = menu.CreateMenu(lines)
+            if err != nil {
+                log.Fatalf("setContext: %s", err)
+            }
+            err = context.ConfirmContext()
+            if err != nil {
+                log.Fatalf("confirmContext: %s", err)
+            }
+        },
+    }
+
+    rootCmd.Execute()
 }
