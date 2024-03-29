@@ -37,7 +37,13 @@ func main() {
         Use:   "ctxgo",
 		Version: "v2.0",
         Short: "GCP context switcher",
-        Long:  "ctxgo delivers a menu selection to switch between GCP contexts.",
+        Long:  `
+ctxgo delivers a menu selection to switch between GCP contexts.
+  1. ctxgo reads the config file to display the menu options.
+  2. ctxgo displays the menu options to the user. (use j/k to navigate, q to quit, and enter to select)
+  3. ctxgo reads the user input and executes the gcloud command to switch the context.
+  4. ctxgo confirms the context switch."`,
+		
         Run: func(cmd *cobra.Command, args []string) {
             lines, err := readLines()
             if err != nil {
