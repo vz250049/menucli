@@ -47,15 +47,15 @@ ctxgo delivers a menu selection to switch between GCP contexts.
         Run: func(cmd *cobra.Command, args []string) {
             lines, err := readLines()
             if err != nil {
-                log.Fatalf("readLines: %s", err)
+				log.Fatalf("Error reading lines from file: %s", err)
             }
             err = menu.CreateMenu(lines)
             if err != nil {
-                log.Fatalf("Error: Access issue %s", err)
+				log.Fatalf("Reauthentication failed. \nPlease run `gcloud auth login` \nto complete reauthentication with SAML. %s", err)
             }
             err = context.ConfirmContext()
             if err != nil {
-                log.Fatalf("confirmContext: %s", err)
+				log.Fatalf("Error confirming context: %s", err)
             }
         },
     }
