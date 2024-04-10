@@ -16,6 +16,7 @@ func ConfirmContext() error {
 	if c.ProcessState.ExitCode() != 0 {
 		return fmt.Errorf("error: %s", b.String())
 	}
-	fmt.Println("Connected to: ", b.String())
+	
+	fmt.Println("\033[1mConnected to:\033[0m", b.String())
 	return nil
 }

@@ -2,11 +2,10 @@ package menu
 
 import (
 	"fmt"
-	"os"
+	"menucli/pkg/cursor"
 	"os/exec"
 	"strings"
-	"menucli/pkg/cursor"
-)	
+)
 
 func CreateMenu(lines []string) error {
 	menu := cursor.NewMenu("\n\nSelect Connection: [ \"q\" to quit] \n\n")
@@ -16,20 +15,15 @@ func CreateMenu(lines []string) error {
 	}
 	choice := menu.Display()
 
-	println(choice)
+	arg := strings.Split(choice, " ")
 
-	if choice == "Quit Menu" {
-		os.Exit(0)
-	} else {
-		arg := strings.Split(choice, " ")
-
-		c, b := exec.Command("gcloud", arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7], arg[8]), new(strings.Builder)
-		c.Stdout = b
-		err := c.Run()
-		if err != nil {
-			return err
-		}
-		fmt.Println(b.String())
+	c, b := exec.Command("gcloud", arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7], arg[8]), new(strings.Builder)
+	c.Stdout = b
+	err := c.Run()
+	if err != nil {
+		return err
 	}
+	fmt.Println(b.String())
+
 	return nil
 }
