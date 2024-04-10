@@ -94,8 +94,9 @@ func (m *Menu) Display() string {
 
 	for {
 		keyCode := getInput()
-		if keyCode == escape {
-			return ""
+		if keyCode == escape { //todo: find different function for escape key
+			fmt.Printf("\033[?25h")
+			os.Exit(0)
 		} else if keyCode == enter {
 			menuItem := m.MenuItems[m.CursorPos]
 			fmt.Println("\r")
@@ -111,7 +112,7 @@ func (m *Menu) Display() string {
 			m.renderMenuItems(true)
 		} else if keyCode == down {
 			m.CursorPos = (m.CursorPos + 1) % len(m.MenuItems)
-			m.renderMenuItems(true)
+			m.renderMenuItems(true)		
 		}else if keyCode == q {
 			fmt.Printf("\033[?25h")
 			os.Exit(0)
